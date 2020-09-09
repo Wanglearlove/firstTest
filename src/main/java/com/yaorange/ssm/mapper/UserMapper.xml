@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yaorange.ssm.mapper.UserMapper">
+    <resultMap id="userResultMap" type="user">
+        <id column="id" property="id"></id>
+        <result column="user_name" property="userName"/>
+        <result column="password" property="password"/>
+        <result column="name" property="name"/>
+        <result column="age" property="age"/>
+        <result column="sex" property="sex"/>
+        <result column="birthday" property="birthday"/>
+        <result column="note" property="note"/>
+        <result column="created" property="created"/>
+        <result column="updated" property="updated"/>
+    </resultMap>
+    <select id="findById" resultMap="userResultMap" parameterType="int">
+        SELECT *
+        FROM tb_user where id = #{id}
+    </select>
+
+    <select id="findAll" resultMap="userResultMap">
+        SELECT *
+        FROM tb_user
+    </select>
+
+    <insert id="insert" parameterType="user">
+        INSERT INTO tb_user(user_name, password, name, age, sex, birthday, note, created, updated)
+        VALUES (#{userName}, #{password}, #{name}, #{age}, #{sex}, #{birthday}, #{note}, #{created}, #{updated})
+    </insert>
+
+    <delete id="deleteById">
+            DELETE FROM tb_user WHERE id = #{id}
+    </delete>
+
+    <update id="update" parameterType="user">
+        UPDATE tb_user SET
+        user_name=#{userName},name=#{name},age=#{age}, sex=#{sex}, birthday=#{birthday}, note=#{note}, updated=#{updated}
+         WHERE id = #{id}
+    </update>
+</mapper>
